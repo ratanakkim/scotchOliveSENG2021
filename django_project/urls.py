@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django_app.views import index
-
+from django_app.views import initmap
 urlpatterns = [
     url(r'^$', index, name = 'index'),
+    url(r'^map/$', initmap , name = 'initmap'),
 ]
