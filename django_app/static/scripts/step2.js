@@ -6,7 +6,6 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-
 function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {
@@ -30,6 +29,7 @@ function initAutocomplete() {
     });
 
     var markers = [];
+
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
@@ -48,9 +48,15 @@ function initAutocomplete() {
 				document.getElementById('firstVideo').href = watchStr.concat(myResponse.items[0].id.videoId);
 				document.getElementById('info-box').textContent = myResponse.items[0].id.videoId ;
         }
-        document.getElementById('firstVideo').textContent =
-            places[0].name;
 
+		//var vidID = myResponse.items[0].id.videoId ;
+		//var vidLink = "https://www.youtube.com/watch?v=".concat(vidID);
+        xmlHttp.open("GET", resQuery, false);
+		// true for asynchronous
+        xmlHttp.send(null);
+
+        document.getElementById('firstVideo').textContent = places[0].name;
+		//document.getElementById('firstVideo').href = "youtube.com";
         if (places.length == 0) {
             return;
         }
