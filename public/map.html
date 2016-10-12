@@ -8,12 +8,13 @@
         <link rel="stylesheet" href="{% static "CSS/style.css" %}">
     </head>
     <body>
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box" onfocusout="mapFocus()">
         <div id="map"></div>
         <!--<div id="info-box">?</div> -->
+        <iframe id="playerFrame" src="https://www.youtube.com/embed/obgckExzwLc" frameborder="0" allowfullscreen></iframe>
         <ul id="myList">
             <li>
-                <a href="" id="firstVideo"></a>
+                <a href="javascript:void(0)" id="firstVideo" onclick="showPlayer()"></a>
             </li>
             <li>
                 <a href="" id="secondVideo"></a>
