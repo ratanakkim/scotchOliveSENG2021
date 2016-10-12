@@ -20,10 +20,12 @@ function initAutocomplete() {
 
   var list = document.getElementById('myList');
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(myList);
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
   var searchBox = new google.maps.places.SearchBox(input);
- // map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+
+
 
 
 
@@ -52,6 +54,7 @@ function initAutocomplete() {
     var embedStr = "https://www.youtube.com/embed/"
     var wholeEmbedStr = " "
     var xmlHttp = new XMLHttpRequest();
+    document.getElementById('map').style.visibility = "visible";
     xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         var myResponse = JSON.parse(xmlHttp.responseText);
@@ -60,8 +63,9 @@ function initAutocomplete() {
       wholeEmbedStr = embedStr.concat(myResponse.items[0].id.videoId);
       document.getElementById('playerFrame').src = wholeEmbedStr;
       document.getElementById('info-box').textContent = wholeEmbedStr;
-	  document.getElementById('map').style.visibility = "visible";
-	  document.getElementById('pac-input').style.zIndex = "-1";
+
+
+
     }
 
 
@@ -69,7 +73,7 @@ function initAutocomplete() {
     //var vidID = myResponse.items[0].id.videoId ;
     //var vidLink = "https://www.youtube.com/watch?v=".concat(vidID);
     xmlHttp.open("GET", resQuery, false);
-    // true for asynchronous 
+    // true for asynchronous
     xmlHttp.send(null);
 
     document.getElementById('firstVideo').textContent = places[0].name;
@@ -125,12 +129,15 @@ function showPlayer() {
   if (document.getElementById('playerFrame').style.visibility == "hidden") {
     document.getElementById('playerFrame').style.visibility = "visible";
   } else {
-    document.getElementById('playerFrame').style.visibility = "hidden";
+    document.getElementById('playerFrame').style.visibility = "hidden"
   }
 
 }
-function mapFocus(){
-	document.getElementById('map').focus();
+function dimMap(){
+	document.getElementById('map').opacity="0.5";
+}
+function searchFocus(){
+	document.getElementById('pac-input').focus();
 }
 
 function addMarker(location, map) {
@@ -152,4 +159,3 @@ function addMarker(location, map) {
 
   });
 }
-
