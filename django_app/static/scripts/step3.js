@@ -36,7 +36,7 @@ function initAutocomplete() {
   map.addListener('bounds_changed', function() {
     searchBox.setBounds(map.getBounds());
   });
-  google.maps.event.addListener(map, 'click', function(event) {
+  google.maps.event.addListener(map, 'rightclick', function(event) {
     addMarker(event.latLng, map);
   });
   var markers = [];
@@ -59,11 +59,22 @@ function initAutocomplete() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         var myResponse = JSON.parse(xmlHttp.responseText);
       //callback(xmlHttp.responseText);
-      document.getElementById('firstVideo').textContent = watchStr.concat(myResponse.items[0].id.videoId);
-      wholeEmbedStr = embedStr.concat(myResponse.items[0].id.videoId);
+      document.getElementById('firstVideo').textContent = watchStr + (myResponse.items[0].id.videoId);
+      document.getElementById('secondVideo').textContent = watchStr + (myResponse.items[1].id.videoId);
+      document.getElementById('thirdVideo').textContent = watchStr + (myResponse.items[2].id.videoId);
+      console.log(myResponse.items.length)
+      Allsrc = []
+      for(i =0;i < myResponse.items.length -1 ;i++){
+        mySrc = myResponse.items[i].id.videoId
+        console.log(mySrc)
+        embedStr = "https://www.youtube.com/embed/"
+        Allsrc.push(mySrc)
+      }
+      console.log(Allsrc)
+      //wholeEmbedStr = embedStr + Allsrc[0]
       document.getElementById('playerFrame').src = wholeEmbedStr;
+      //document.getElementById('playerFrame').src = wholeEmbedStr;
       document.getElementById('info-box').textContent = wholeEmbedStr;
-
 
 
     }
@@ -77,6 +88,8 @@ function initAutocomplete() {
     xmlHttp.send(null);
 
     document.getElementById('firstVideo').textContent = places[0].name;
+    document.getElementById('secondVideo').textContent = places[0].name;
+    document.getElementById('thirdVideo').textContent = places[0].name;
     //document.getElementById('firstVideo').href = "youtube.com";
     if (places.length == 0) {
       return;
@@ -124,13 +137,21 @@ function initAutocomplete() {
   });
 }
 
-function showPlayer() {
-
+function showPlayer(index) {
+  embedStr = "https://www.youtube.com/embed/"
   if (document.getElementById('playerFrame').style.visibility == "hidden") {
+    document.getElementById('playerFrame').src = embedStr + Allsrc[index]
     document.getElementById('playerFrame').style.visibility = "visible";
+
+    //document.getElementById('info-box').textContent = embedStr + Allsrc[index]
   } else {
+  //  document.getElementById('playerFrame').src = embedStr + Allsrc[index]
+  //  document.getElementById('info-box').textContent = embedStr + Allsrc[index]
     document.getElementById('playerFrame').style.visibility = "hidden"
+  //  document.getElementById('playerFrame').src = embedStr + Allsrc[index]
+
   }
+
 
 }
 function dimMap(){
