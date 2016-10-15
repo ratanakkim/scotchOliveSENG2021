@@ -54,14 +54,24 @@ function initAutocomplete() {
     var embedStr = "https://www.youtube.com/embed/"
     var wholeEmbedStr = " "
     var xmlHttp = new XMLHttpRequest();
+    //added var
+    var name1 = " ";
+    var name2 = " ";
+    var name3 = " ";
+    //
     document.getElementById('map').style.visibility = "visible";
     xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         var myResponse = JSON.parse(xmlHttp.responseText);
+
       //callback(xmlHttp.responseText);
       document.getElementById('firstVideo').textContent = watchStr + (myResponse.items[0].id.videoId);
       document.getElementById('secondVideo').textContent = watchStr + (myResponse.items[1].id.videoId);
       document.getElementById('thirdVideo').textContent = watchStr + (myResponse.items[2].id.videoId);
+      //
+      name1 = myResponse.items[0].snippet.title;
+      name2 = myResponse.items[1].snippet.title;
+      name3 = myResponse.items[2].snippet.title;
       console.log(myResponse.items.length)
       Allsrc = []
       for(i =0;i < myResponse.items.length -1 ;i++){
@@ -87,9 +97,9 @@ function initAutocomplete() {
     // true for asynchronous
     xmlHttp.send(null);
 
-    document.getElementById('firstVideo').textContent = places[0].name;
-    document.getElementById('secondVideo').textContent = places[0].name;
-    document.getElementById('thirdVideo').textContent = places[0].name;
+    document.getElementById('firstVideo').textContent = name1;
+    document.getElementById('secondVideo').textContent = name2;
+    document.getElementById('thirdVideo').textContent = name3;
     //document.getElementById('firstVideo').href = "youtube.com";
     if (places.length == 0) {
       return;
