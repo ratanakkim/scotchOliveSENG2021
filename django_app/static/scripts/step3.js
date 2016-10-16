@@ -26,8 +26,10 @@ function initAutocomplete() {
   var searchBox = new google.maps.places.SearchBox(input);
 
 
+  //create an empty list of places firstly
+  var placeList = [];
 
-
+  var markers = [];
 
 
 
@@ -37,9 +39,9 @@ function initAutocomplete() {
     searchBox.setBounds(map.getBounds());
   });
   google.maps.event.addListener(map, 'rightclick', function(event) {
-    addMarker(event.latLng, map);
+    addMarker(event.latLng, map,placeList);
   });
-  var markers = [];
+
 
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
@@ -109,7 +111,7 @@ function initAutocomplete() {
     markers.forEach(function(marker) {
       marker.setMap(null);
     });
-    markers = [];
+    //markers = [];
 
     // For each place, get the icon, name and location.
     var bounds = new google.maps.LatLngBounds();
@@ -171,7 +173,7 @@ function searchFocus(){
 	document.getElementById('pac-input').focus();
 }
 
-function addMarker(location, map) {
+function addMarker(location, map,placeList) {
   // Add the marker at the clicked location, and add the next-available label
   // from the array of alphabetical characters.
   var marker = new google.maps.Marker({
@@ -185,8 +187,29 @@ function addMarker(location, map) {
   google.maps.event.addListener(marker, 'click', function() {
     var coord = marker.getPosition();
     var transCoor = coord.toString();
-    infoWindow.setContent(transCoor);
+    infoWindow.setContent('<p>'+transCoor+'</p>'+'<button onclick="addIntoListFunc(location,map,placeList)">Save me to List</button>');
     infoWindow.open(map, marker);
 
   });
+}
+
+function addIntoListFunc(location, map,placeList){
+
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map,
+  });
+  /*
+  geocoder.geocode({'location': latlng}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      if(results[1]){
+
+      }
+
+    }
+  }
+  */
+
+  placeList = [{placeName: 'name',placePosition:marker.position.toString()}];
+  console.log(marker);
 }
