@@ -16,7 +16,15 @@ Including another URLconf
 from django.conf.urls import url
 from django_app.views import index
 from django_app.views import initmap
+from django_app.views import category
+from django_app.views import fun
+from django_app.views import party
+from django_app.views import foodAndDrinks
 urlpatterns = [
     url(r'^$', index, name = 'index'),
     url(r'^map/$', initmap , name = 'initmap'),
+    url(r'^category/$', category , name = 'category'),
+    url(r'^category/fun.html$', fun , name = 'fun'),
+    url(r'^category/party.html$', party , name = 'party'),
+    url(r'^category/foodAndDrinks.html$', foodAndDrinks , name = 'eats'),
 ]
