@@ -6,7 +6,8 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 var wikiRes = "";
-
+var markers = [];
+var tempID = 0;
 function initAutocomplete() {
 
     infoWindow = new google.maps.InfoWindow();
@@ -28,7 +29,7 @@ function initAutocomplete() {
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
     var placeList = [];
-    var markers = [];
+
 
     if (idStr != null) {
         document.getElementById('map').style.visibility = "visible";
@@ -81,7 +82,7 @@ function initAutocomplete() {
                 Allsrc.push(mySrc)
             }
             console.log(Allsrc)
-                //wholeEmbedStr = embedStr + Allsrc[0]
+            //wholeEmbedStr = embedStr + Allsrc[0]
             document.getElementById('playerFrame').src = wholeEmbedStr;
             //document.getElementById('playerFrame').src = wholeEmbedStr;
             document.getElementById('info-box').textContent = wholeEmbedStr;
@@ -107,9 +108,9 @@ function initAutocomplete() {
 
         // Clear out the old markers.
         /*markers.forEach(function(marker) {
-            marker.setMap(null);
-        });
-        */
+         marker.setMap(null);
+         });
+         */
         //markers = [];
 
         // For each place, get the icon, name and location.
@@ -129,16 +130,20 @@ function initAutocomplete() {
             };
 
             // Create a marker for each place.
-            /*markers.push(new google.maps.Marker({
+            markers.push(new google.maps.Marker({
                 map: map,
                 icon: icon,
                 title: place.name,
                 position: place.geometry.location,
                 saved: 0,
                 deleted: 0,
+                number:markers.length,
 
-            }));*/
-            //console.log(markers.length);
+
+            }));
+
+
+            console.log(markers.length);
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
                 bounds.union(place.geometry.viewport);
@@ -150,11 +155,9 @@ function initAutocomplete() {
         map.fitBounds(bounds);
     });
     google.maps.event.addListener(map, 'rightclick', function(event) {
-        //console.log(markers.length);
-        //addMarker(event.latLng, map, markers);
-        addMarker(event.latLng, map);
+        console.log(markers.length);
+        addMarker(event.latLng, map, markers);
     });
-
 }
 
 function showPlayer(index) {
@@ -170,7 +173,7 @@ function showPlayer(index) {
         //  document.getElementById('playerFrame').src = embedStr + Allsrc[index]
         //  document.getElementById('info-box').textContent = embedStr + Allsrc[index]
         document.getElementById('playerFrame').style.visibility = "hidden"
-            //  document.getElementById('playerFrame').src = embedStr + Allsrc[index]
+        //  document.getElementById('playerFrame').src = embedStr + Allsrc[index]
 
     }
 
@@ -186,174 +189,143 @@ function searchFocus() {
     document.getElementById('pac-input').focus();
 }
 
-//function addMarker(location, map, markers) {
-/*function addMarker(location, map) {
+function addMarker(location, map, markers) {
     // Add the marker at the clicked location, and add the next-available label
     // from the array of alphabetical characters.
-    //console.log(markers.length);
-    //  ----
-    //placeList =
-    /*markers.push(new google.maps.Marker({
-        map: map,
 
-        //title:
-        position: location,
-        saved: 0,
-        //deleted: 0,
-
-    }));*/
-    /*
     var marker = new google.maps.Marker({
-      position: location,
-      map: map,
+        position: location,
+        map: map,
+        saved :0,
+        deleted:0,
+        number:markers.length,
     });
-    */
-    /*var infowindow = new google.maps.InfoWindow({
-      content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
-    });*/
-    //infowindow.open(map,marker);
-    //var marker = markers[1];
-    //markers.forEach(function(marker) {
-    /*google.maps.event.addListener(marker, 'click', function() {
-        //console.log(markers.length.toString());
+    markers[markers.length] = marker;
+    console.log(markers.length);
+    console.log(marker.number+"sup");
 
-        var coord = marker.getPosition();
-        var transCoor = coord.toString();
-        /*infoWindow.setContent('<p>' + transCoor + '</p>' + '<button onclick=savePlace()>Save me to List</button>' +
-            '<button onclick=deletePlace()>Remove the place from list</button>'
-        );*/
-    /*infoWindow.setContent(transCoor);
-    infoWindow.open(map, marker);
-    document.getElementById('wikiButton').textContent =transCoor;*/
-
-    /*
-    if(marker.deleted ==2){
-      marker.setMap(null);
-      //markers;
-    }
-    */
-
-    /*});
-    //});
-
-}*/
-    function addMarker(location, map) {
-        // Add the marker at the clicked location, and add the next-available label
-        // from the array of alphabetical characters.
-        var marker = new google.maps.Marker({
-            position: location,
-            map: map,
-        });
-        /*var infowindow = new google.maps.InfoWindow({
-          content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
-        });*/
-        //infowindow.open(map,marker);
-        google.maps.event.addListener(marker, 'click', function() {
+    markers.forEach(function(marker) {
+        google.maps.event.addListener(marker, 'click', function () {
+            tempID = marker.number;
+            console.log(markers.length.toString());
+            var save1;
             var coord = marker.getPosition();
             var transCoor = coord.toString();
-            infoWindow.setContent('<p>' + transCoor + '</p>' + '<button onclick=savePlace()>Save me to List</button>' +
-                '<button onclick=deletePlace()>Remove the place from list</button>');
+            var compiled = '<button onclick="savePlace()">Save me to List</button>' +
+                '<button onclick=deletePlace()>Remove the place from list</button>';
+
+            infoWindow.setContent('<p>' + transCoor + '</p>' + compiled
+            );
+
             infoWindow.open(map, marker);
-            document.getElementById('wikiPane').textContent = transCoor;
-
         });
+
+    });
+}
+
+function savePlace() {
+    var temp = 0;
+    while(temp != tempID && temp < 20){
+        temp++;
+    }
+    if (markers[temp].saved == 1) {
+        window.alert("This place has already been added into list!");
+    } else {
+        markers[temp].saved = 1;
+        var x = document.createElement('LI');
+        var a = document.createElement('a');
+        a.className = "dr-icon1 dr-icon-loc";
+        var textNode = document.createTextNode(markers[temp].number+"\n");
+        x.appendChild(a);
+        x.appendChild(textNode);
+        document.getElementById('placeList').appendChild(x);
+        console.log(markers[temp].saved + "saved place");
+        window.alert("Cheers, u have saved this place to list!");
+    }
+    console.log(markers[temp].saved+"iiii");
+}
+
+function deletePlace() {
+    var temp = 0;
+    while(temp != tempID && temp < 20 ){
+        temp++;
     }
 
-    function savePlace() {
-        if (this.saved == 1) {
-            var x = document.createElement('LI');
-            var a = document.createElement('a');
-            a.className = "dr-icon1 dr-icon-loc";
-            var textNode = document.createTextNode(document.getElementById('wikiPane').textContent);
-            x.appendChild(a);
-            x.appendChild(textNode);
-            document.getElementById('placeList').appendChild(x);
-            window.alert("This place has already been added into list!");
-        } else {
-            this.saved = 1;
-            console.log(this.saved + "saved place");
-            window.alert("Cheers, u have saved this place to list!");
-        }
+    if (markers[temp].deleted == 1) {
+        window.alert("The place has been deleted/not added, no need to do again");
+    } else {
+        markers[temp].deleted = 1;
+        console.log("deleted");
+        //window.alert("Cheers, the place has now been removed from list");
     }
 
-    function deletePlace() {
+}
 
-        if (this.deleted == 1) {
-            window.alert("The place has been deleted/not added, no need to do again");
-        } else {
-            this.deleted = 1;
-            console.log("deleted");
-            //window.alert("Cheers, the place has now been removed from list");
-        }
+function addIntoListFunc(location, map, placeList) {
+
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map,
+    });
+    /*
+     geocoder.geocode({'location': latlng}, function(results, status) {
+     if (status === google.maps.GeocoderStatus.OK) {
+     if(results[1]){
+
+     }
+
+     }
+     }
+     */
+
+    placeList = [{
+        placeName: 'name',
+        placePosition: marker.position.toString()
+    }];
+    console.log(marker);
+}
+
+function createCORSRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+        // XHR for Chrome/Firefox/Opera/Safari.
+        xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined") {
+        // XDomainRequest for IE.
+        xhr = new XDomainRequest();
+        xhr.open(method, url, true);
+    } else {
+        // CORS not supported.
+        xhr = null;
 
     }
+    return xhr;
+}
 
-    /*function addIntoListFunc(location, map, placeList) {
+function getInfo(name) {
+    var url = "https://crossorigin.me/https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=" + encodeURI(name);
 
-        var marker = new google.maps.Marker({
-            position: location,
-            map: map,
-        });
-        /*
-        geocoder.geocode({'location': latlng}, function(results, status) {
-          if (status === google.maps.GeocoderStatus.OK) {
-            if(results[1]){
-
-            }
-
-          }
-        }
-
-
-        placeList = [{
-            placeName: 'name',
-            placePosition: marker.position.toString()
-        }];
-        console.log(marker);
-    }*/
-
-    function createCORSRequest(method, url) {
-        var xhr = new XMLHttpRequest();
-        if ("withCredentials" in xhr) {
-            // XHR for Chrome/Firefox/Opera/Safari.
-            xhr.open(method, url, true);
-        } else if (typeof XDomainRequest != "undefined") {
-            // XDomainRequest for IE.
-            xhr = new XDomainRequest();
-            xhr.open(method, url, true);
-        } else {
-            // CORS not supported.
-            xhr = null;
-
-        }
-        return xhr;
+    var xhr = createCORSRequest('GET', url);
+    if (!xhr) {
+        alert('CORS not supported');
+        return;
     }
 
-    function getInfo(name) {
-        var url = "https://crossorigin.me/https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=" + encodeURI(name);
+    //xhr.onload = function() {
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = xhr.responseText;
+            var jsonReponse = JSON.parse(response);
+            var text = Object.values(jsonReponse.query.pages)[0].extract;
+            //alert(text);
 
-        var xhr = createCORSRequest('GET', url);
-        if (!xhr) {
-            alert('CORS not supported');
-            return;
+            document.getElementById("wikiPane").innerHTML = text;
+            return text;
         }
+    };
 
-        //xhr.onload = function() {
-        xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var response = xhr.responseText;
-                var jsonReponse = JSON.parse(response);
-                var text = Object.values(jsonReponse.query.pages)[0].extract;
-                //alert(text);
-
-                document.getElementById("wikiPane").innerHTML = text;
-                return text;
-            }
-        };
-
-        xhr.onerror = function() {
-            alert('Woops, there was an error getting information.');
-        };
-        xhr.send();
-    }
-    google.maps.event.addDomListener(window, 'load', initAutocomplete);
+    xhr.onerror = function() {
+        alert('Woops, there was an error getting information.');
+    };
+    xhr.send();
+}
