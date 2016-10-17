@@ -1,7 +1,7 @@
 /* General Demo Style */
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
-body, html { font-size: 100%; padding: 0; margin: 0;}
+body, html { font-size: 100%; padding: 0; margin: 0; height: 100%}
 
 /* Reset */
 *,
@@ -25,7 +25,7 @@ body, html { font-size: 100%; padding: 0; margin: 0;}
 
 body {
 	font-family: 'Lato', Calibri, Arial, sans-serif;
-	color: #fff;
+	color: #000000;
 	background: #91cfa1;
 	font-weight: 300;
 }
@@ -44,7 +44,7 @@ a:hover {
 	//width: 100%;
 	width: 70%;
 	margin: 0 auto;
-	//padding: 0 1.875em 3.125em 1.875em;
+	padding: 0 1.875em 3.125em 1.875em;
 
 }
 
@@ -77,7 +77,8 @@ a:hover {
 }
 
 .container > header {
-	padding: 2.875em 1.875em 2.875em;
+	/*padding: 2.875em 1.875em 2.875em;*/
+
 	text-align: center;
 	background: rgba(0,0,0,0.02);
 }
@@ -94,7 +95,7 @@ a:hover {
 	display: block;
 	font-size: 60%;
 	color: rgba(255,255,255,0.7);
-	padding: 0 0 0.6em 0.1em;
+	/*padding: 0 0 0.6em 0.1em; */
 }
 
 /* Header Style */

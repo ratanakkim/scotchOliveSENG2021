@@ -18,10 +18,28 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+.infobutton{
+	left:0%;
+	top:35%;
+	position: absolute;
+    width: 15%;
+    //height: 50%;
+}
+.infoPanel{
+	left:0%;
+	top:40%;
+	position: absolute;
+    width: 15%;
+	overflow:auto;
+    //height: 50%;
+}
 .dr-menu {
 	float:left;//added
 	//width: 100%;
 	width: 15%;
+	height: 30%;//added
+	max-height: 30%;
 	max-width: 400px;
 	//min-width: 300px;
 	//position: relative;

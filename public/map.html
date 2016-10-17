@@ -12,14 +12,20 @@
     </head>
     <body>
         <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+        <input class="infobutton" id="wikiPanel" type="button" name="info" value="Information" onclick="getInfo('blah')" >
+        <div  id= "wikiPane" class="infoPanel">Text goes here all day erry day</div>
         <nav class="dr-menu">
             <div class="dr-trigger"><span class="dr-icon dr-icon-menu"></span><a class="dr-label">video</a></div>
             <ul  id="myList" class="listClass">
                 <li><a class="dr-icon1 dr-icon-play" href="javascript:void(0)" id="firstVideo" onclick="showPlayer(0)"></a></li>
                 <li><a class="dr-icon1 dr-icon-play" href="javascript:void(0)" id="secondVideo" onclick="showPlayer(1)"></a></li>
                 <li><a class="dr-icon1 dr-icon-play" href="javascript:void(0)" id="thirdVideo" onclick="showPlayer(2)"></a></li>
+
             </ul>
         </nav>
+
+        <!--<input id="wikiButton" class="wikiB" type="button" name="info" value="Information" onclick="showPlayer(0)" > -->
+        <div id"infoPanel" class="wikiPanel"></div>
         <div id="map" class="main"></div>
         <nav class="dr-menu">
             <div class="dr-trigger"><span class="dr-icon dr-icon-menu"></span><a class="dr-label">Route</a></div>
@@ -29,7 +35,6 @@
         </nav>
         <!--<div id="info-box">?</div> -->
         <iframe id="playerFrame" src="https://www.youtube.com/embed/obgckExzwLc" frameborder="0" allowfullscreen></iframe>
-
 
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4d2ew9UfHchhlYl_VBLtGryqgwbD18eA&libraries=places&callback=initAutocomplete" async defer></script>

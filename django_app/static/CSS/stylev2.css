@@ -1,8 +1,3 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
 
 #map {
     float:left;
@@ -48,8 +43,14 @@ html, body {
     //padding: 0 0px 0 0px;
     //text-overflow: ellipsis;
     width: 100%;
-    height: 200px;
+    height: 30%;
 }
+#wikiButton{
+    left: 0%;
+    width: 15%;
+    float: left;
+}
+
 #placeList {
     //background-color: #ddd;
     left:0%
