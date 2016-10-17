@@ -12,3 +12,5 @@ def party(request):
     return render(request, "party.html", {})
 def foodAndDrinks(request):
     return render(request, "party.html", {})
+def directions(request):
+    return render(request, "directions.html", {})

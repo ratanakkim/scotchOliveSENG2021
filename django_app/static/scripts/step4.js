@@ -5,7 +5,7 @@
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-var wikiRes = " ";
+var wikiRes = "";
 
 function initAutocomplete() {
 
@@ -18,7 +18,7 @@ function initAutocomplete() {
         zoom: 13,
         mapTypeId: 'roadmap'
     });
-
+    getInfo('Sydney');
     var curURL = location.href;
     var idStr = curURL.match(/idType=.+$/g);
     var list = document.getElementById('myList');
@@ -59,7 +59,6 @@ function initAutocomplete() {
         var name2 = " ";
         var name3 = " ";
         var xmlHttp = new XMLHttpRequest();
-
         document.getElementById('map').style.visibility = "visible";
         xmlHttp.onreadystatechange = function() {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -68,7 +67,8 @@ function initAutocomplete() {
             document.getElementById('firstVideo').textContent = watchStr + (myResponse.items[0].id.videoId);
             document.getElementById('secondVideo').textContent = watchStr + (myResponse.items[1].id.videoId);
             document.getElementById('thirdVideo').textContent = watchStr + (myResponse.items[2].id.videoId);
-            alert(getInfo('Sydney'));
+            //alert(getInfo('Sydney'));
+            //getInfo('Sydney');
             name1 = myResponse.items[0].snippet.title;
             name2 = myResponse.items[1].snippet.title;
             name3 = myResponse.items[2].snippet.title;
@@ -99,6 +99,7 @@ function initAutocomplete() {
         document.getElementById('firstVideo').textContent = name1;
         document.getElementById('secondVideo').textContent = name2;
         document.getElementById('thirdVideo').textContent = name3;
+
         //document.getElementById('firstVideo').href = "youtube.com";
         if (places.length == 0) {
             return;
@@ -155,6 +156,8 @@ function initAutocomplete() {
 }
 
 function showPlayer(index) {
+    alert(wikiRes);
+    document.getElementById("wikiPane").innerHTML = wikiRes;
     embedStr = "https://www.youtube.com/embed/"
     if (document.getElementById('playerFrame').style.visibility == "hidden") {
         document.getElementById('playerFrame').src = embedStr + Allsrc[index]
@@ -171,6 +174,7 @@ function showPlayer(index) {
 
 
 }
+
 
 function dimMap() {
     document.getElementById('map').opacity = "0.5";
@@ -230,6 +234,9 @@ function addMarker(location, map, markers) {
 
 function savePlace() {
     if (this.saved == 1) {
+        var x = document.createElement("LI");
+        var node = document.getElementById('placeList').lastChild;
+        
         window.alert("This place has already been added into list!");
     } else {
         this.saved = 1;
@@ -243,7 +250,6 @@ function deletePlace() {
     if (this.deleted == 1) {
         window.alert("The place has been deleted/not added, no need to do again");
     } else {
-
         this.deleted = 1;
         console.log("deleted");
         window.alert("Cheers, the place has now been removed from list");
@@ -283,10 +289,11 @@ function createCORSRequest(method, url) {
     } else if (typeof XDomainRequest != "undefined") {
         // XDomainRequest for IE.
         xhr = new XDomainRequest();
-        xhr.open(method, url);
+        xhr.open(method, url, true);
     } else {
         // CORS not supported.
         xhr = null;
+
     }
     return xhr;
 }
@@ -300,14 +307,18 @@ function getInfo(name) {
         return;
     }
 
-    xhr.onload = function() {
-        var response = xhr.responseText;
-        var jsonReponse = JSON.parse(response);
-        var text = Object.values(jsonReponse.query.pages)[0].extract;
-        //alert(text);
-        document.getElementById("wikiPane").innerHTML = text;
-        return text;
-    };
+    //xhr.onload = function() {
+     xhr.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var response = xhr.responseText;
+              var jsonReponse = JSON.parse(response);
+              var text = Object.values(jsonReponse.query.pages)[0].extract;
+              //alert(text);
+
+              document.getElementById("wikiPane").innerHTML = text;
+              return text;
+          }
+          };
 
     xhr.onerror = function() {
         alert('Woops, there was an error getting information.');

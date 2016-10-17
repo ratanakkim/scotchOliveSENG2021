@@ -20,6 +20,7 @@ from django_app.views import category
 from django_app.views import fun
 from django_app.views import party
 from django_app.views import foodAndDrinks
+from django_app.views import directions
 urlpatterns = [
     url(r'^$', index, name = 'index'),
     url(r'^map/$', initmap , name = 'initmap'),
@@ -28,4 +29,5 @@ urlpatterns = [
     url(r'^category/fun.html$', fun , name = 'fun'),
     url(r'^category/party.html$', party , name = 'party'),
     url(r'^category/foodAndDrinks.html$', foodAndDrinks , name = 'eats'),
+    url(r'^directions/$', directions , name = 'directions'),
 ]

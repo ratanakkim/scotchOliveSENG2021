@@ -33,6 +33,7 @@
     width: 15%;
 	overflow:auto;
     //height: 50%;
+	z-index: 1000;
 }
 .dr-menu {
 	float:left;//added
