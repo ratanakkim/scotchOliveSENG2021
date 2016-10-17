@@ -38,20 +38,10 @@ function initAutocomplete() {
         var fullSearchQ = searchQ.concat(searchQ).concat(keyQ);
     }
 
-
-
-
-
-
-
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function() {
         searchBox.setBounds(map.getBounds());
     });
-    google.maps.event.addListener(map, 'rightclick', function(event) {
-        addMarker(event.latLng, map);
-    });
-
 
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
@@ -115,9 +105,10 @@ function initAutocomplete() {
         }
 
         // Clear out the old markers.
-        markers.forEach(function(marker) {
+        /*markers.forEach(function(marker) {
             marker.setMap(null);
         });
+        */
         //markers = [];
 
         // For each place, get the icon, name and location.
@@ -142,9 +133,11 @@ function initAutocomplete() {
                 icon: icon,
                 title: place.name,
                 position: place.geometry.location,
+                saved: 0,
+                deleted: 0,
 
             }));
-
+            console.log(markers.length);
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
                 bounds.union(place.geometry.viewport);
@@ -154,6 +147,10 @@ function initAutocomplete() {
         });
 
         map.fitBounds(bounds);
+    });
+    google.maps.event.addListener(map, 'rightclick', function(event) {
+        console.log(markers.length);
+        addMarker(event.latLng, map, markers);
     });
 }
 
@@ -183,24 +180,75 @@ function searchFocus() {
     document.getElementById('pac-input').focus();
 }
 
-function addMarker(location, map, placeList) {
+function addMarker(location, map, markers) {
     // Add the marker at the clicked location, and add the next-available label
     // from the array of alphabetical characters.
-    var marker = new google.maps.Marker({
-        position: location,
+    console.log(markers.length);
+    //  ----
+    //placeList =
+    markers.push(new google.maps.Marker({
         map: map,
+
+        //title:
+        position: location,
+        saved: 0,
+        //deleted: 0,
+
+    }));
+    /*
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map,
     });
+    */
     /*var infowindow = new google.maps.InfoWindow({
       content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
     });*/
     //infowindow.open(map,marker);
-    google.maps.event.addListener(marker, 'click', function() {
-        var coord = marker.getPosition();
-        var transCoor = coord.toString();
-        infoWindow.setContent('<p>' + transCoor + '</p>' + '<button onclick="addIntoListFunc(location,map,placeList)">Save me to List</button>');
-        infoWindow.open(map, marker);
+    //var marker = markers[1];
+    markers.forEach(function(marker) {
+        google.maps.event.addListener(marker, 'click', function() {
+            console.log(markers.length.toString());
 
+            var coord = marker.getPosition();
+            var transCoor = coord.toString();
+            infoWindow.setContent('<p>' + transCoor + '</p>' + '<button onclick=savePlace()>Save me to List</button>' +
+                '<button onclick=deletePlace()>Remove the place from list</button>'
+            );
+            infoWindow.open(map, marker);
+            /*
+            if(marker.deleted ==2){
+              marker.setMap(null);
+              //markers;
+            }
+            */
+
+        });
     });
+
+}
+
+function savePlace() {
+    if (this.saved == 1) {
+        window.alert("This place has already been added into list!");
+    } else {
+        this.saved = 1;
+        console.log(this.saved + "saved place");
+        window.alert("Cheers, u have saved this place to list!");
+    }
+}
+
+function deletePlace() {
+
+    if (this.deleted == 1) {
+        window.alert("The place has been deleted/not added, no need to do again");
+    } else {
+
+        this.deleted = 1;
+        console.log("deleted");
+        window.alert("Cheers, the place has now been removed from list");
+    }
+
 }
 
 function addIntoListFunc(location, map, placeList) {
