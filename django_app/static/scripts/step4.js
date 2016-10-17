@@ -234,9 +234,13 @@ function addMarker(location, map, markers) {
 
 function savePlace() {
     if (this.saved == 1) {
-        var x = document.createElement("LI");
-        var node = document.getElementById('placeList').lastChild;
-        
+        var x = document.createElement('LI');
+        var a = document.createElement('a');
+        a.className = "dr-icon1 dr-icon-loc";
+        var textNode = document.createTextNode("Testing\n");
+        x.appendChild(a);
+        x.appendChild(textNode);
+        document.getElementById('placeList').appendChild(x);
         window.alert("This place has already been added into list!");
     } else {
         this.saved = 1;
@@ -252,7 +256,7 @@ function deletePlace() {
     } else {
         this.deleted = 1;
         console.log("deleted");
-        window.alert("Cheers, the place has now been removed from list");
+        //window.alert("Cheers, the place has now been removed from list");
     }
 
 }

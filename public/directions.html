@@ -66,10 +66,10 @@
       function initMap() {
 		var coordinates = []; //this array needs to have the coordinates of the places, stored as strings such as "41.43206,-81.38992". Alternatively, it could be 1 big long string separated by :
 		coordinates = ["-33.8568,151.2153", "-33.8733,151.2062"]; //should be opera house and town hall
-	  
+
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
-		
+
 		//centre google maps over current location
 		var pos;
 		if (navigator.geolocation) {
@@ -82,6 +82,11 @@
           // Browser doesn't support Geolocation
           pos={lat: -33.9173, lng: 151.2313}; //UNSW
         }
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 7,
+          center: pos//{lat: 41.85, lng: -87.65}
+        });
+        directionsDisplay.setMap(map);
 		/*
 		infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
@@ -90,13 +95,9 @@
             handleLocationError(true, infoWindow, map.getCenter());
         });
 		*/
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7,
-          center: pos//{lat: 41.85, lng: -87.65} 		  
-        });
-        directionsDisplay.setMap(map);
+
 		//END CENTRE OVER CURRENT LOCATION
-		
+
 		/*
         var onChangeHandler = function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -109,7 +110,7 @@
 
 	  //we use join inside here to join arrays into strings
       function calculateAndDisplayRoute(directionsService, directionsDisplay, pos, coordinates) {
-	  //origin and destination is home which is assumed to be current location, 
+	  //origin and destination is home which is assumed to be current location,
         directionsService.route({
           origin: pos.join(),
           destination: pos.join(),
@@ -134,7 +135,7 @@
 		*/
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js&key=AIzaSyB4d2ew9UfHchhlYl_VBLtGryqgwbD18eA&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4d2ew9UfHchhlYl_VBLtGryqgwbD18eA&libraries=places&callback=initMap">
     </script>
   </body>
 </html>
