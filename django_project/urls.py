@@ -21,6 +21,7 @@ from django_app.views import fun
 from django_app.views import party
 from django_app.views import foodAndDrinks
 from django_app.views import directions
+from django_app.views import directPres
 urlpatterns = [
     url(r'^$', index, name = 'index'),
     url(r'^map/$', initmap , name = 'initmap'),
@@ -30,4 +31,5 @@ urlpatterns = [
     url(r'^category/party.html$', party , name = 'party'),
     url(r'^category/foodAndDrinks.html$', foodAndDrinks , name = 'eats'),
     url(r'^directions/$', directions , name = 'directions'),
+    url(r'^presets/$', directPres , name = 'presets'),
 ]

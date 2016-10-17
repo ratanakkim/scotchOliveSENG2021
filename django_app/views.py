@@ -14,3 +14,5 @@ def foodAndDrinks(request):
     return render(request, "party.html", {})
 def directions(request):
     return render(request, "directions.html", {})
+def directPres(request):
+    return render(request, "directionsPreset.html", {})
