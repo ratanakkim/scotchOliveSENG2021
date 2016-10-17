@@ -8,6 +8,7 @@
 var wikiRes = "";
 var markers = [];
 var tempID = 0;
+//var positionList = [];
 
 function initAutocomplete() {
 
@@ -87,7 +88,7 @@ function initAutocomplete() {
                 Allsrc.push(mySrc)
             }
             console.log(Allsrc)
-                //wholeEmbedStr = embedStr + Allsrc[0]
+            //wholeEmbedStr = embedStr + Allsrc[0]
             document.getElementById('playerFrame').src = wholeEmbedStr;
             //document.getElementById('playerFrame').src = wholeEmbedStr;
             document.getElementById('info-box').textContent = wholeEmbedStr;
@@ -178,7 +179,7 @@ function showPlayer(index) {
         //  document.getElementById('playerFrame').src = embedStr + Allsrc[index]
         //  document.getElementById('info-box').textContent = embedStr + Allsrc[index]
         document.getElementById('playerFrame').style.visibility = "hidden"
-            //  document.getElementById('playerFrame').src = embedStr + Allsrc[index]
+        //  document.getElementById('playerFrame').src = embedStr + Allsrc[index]
 
     }
 
@@ -217,7 +218,7 @@ function addMarker(location, map, markers) {
             var coord = marker.getPosition();
             var transCoor = coord.toString();
             var compiled = '<button onclick="savePlace()">Save me to List</button>' +
-                '<button onclick=deletePlace()>Remove the place from list</button>';
+                '<button onclick=deletePlace()>Reset list</button>';
 
             infoWindow.setContent('<p>' + transCoor + '</p>' + compiled);
 
@@ -236,10 +237,12 @@ function savePlace() {
         window.alert("This place has already been added into list!");
     } else {
         markers[temp].saved = 1;
+        markers[temp].deleted = 0;
         var x = document.createElement('LI');
         var a = document.createElement('a');
         a.className = "dr-icon1 dr-icon-loc";
         var textNode = document.createTextNode(markers[temp].getPosition().toString() + "\n");
+        //positionList.push(markers[temp].number);
         x.appendChild(a);
         x.appendChild(textNode);
         document.getElementById('placeList').appendChild(x);
@@ -250,44 +253,51 @@ function savePlace() {
 }
 
 function deletePlace() {
+    /*
     var temp = 0;
-    while (temp != tempID && temp < 20) {
+    var temp1 = 0;
+    var list = document.getElementById('placeList');
+
+    while(markers[temp].number != tempID && temp<markers.length){
         temp++;
     }
+
+    while(markers[temp].number != positionList[temp1] && temp1<list.childElementCount){
+        temp1++;
+    }
+
 
     if (markers[temp].deleted == 1) {
         window.alert("The place has been deleted/not added, no need to do again");
     } else {
-        markers[temp].deleted = 1;
+        console.log(temp+"ooooo");
+
+
+
+
+        if(markers[temp].number == tempID && markers[temp].number== positionList[temp1]){
+            console.log("doing");
+            list.removeChild(list.childNodes[temp1]);
+            markers[temp].deleted = 1;
+            markers[temp].saved = 0;
+        }
+        console.log(temp);
+        console.log(temp1);
+
         console.log("deleted");
         //window.alert("Cheers, the place has now been removed from list");
     }
-
-}
-
-function addIntoListFunc(location, map, placeList) {
-
-    var marker = new google.maps.Marker({
-        position: location,
-        map: map,
+    */
+    markers.forEach(function (marker){
+        marker.saved = 0;
     });
-    /*
-     geocoder.geocode({'location': latlng}, function(results, status) {
-     if (status === google.maps.GeocoderStatus.OK) {
-     if(results[1]){
+    var list = document.getElementById('placeList');
+    list.textContent = '';
 
-     }
 
-     }
-     }
-     */
-
-    placeList = [{
-        placeName: 'name',
-        placePosition: marker.position.toString()
-    }];
-    console.log(marker);
 }
+
+
 
 function createCORSRequest(method, url) {
     var xhr = new XMLHttpRequest();
