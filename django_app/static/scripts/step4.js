@@ -227,7 +227,7 @@ function createCORSRequest(method, url) {
 }
 
 function getInfo(name) {
-  var url = "https://crossorigin.me/https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=" + name;
+  var url = "https://crossorigin.me/https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=" + encodeURI(name);
 
   var xhr = createCORSRequest('GET', url);
   if (!xhr) {
