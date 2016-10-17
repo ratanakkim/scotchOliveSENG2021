@@ -23,6 +23,7 @@ from django_app.views import foodAndDrinks
 urlpatterns = [
     url(r'^$', index, name = 'index'),
     url(r'^map/$', initmap , name = 'initmap'),
+    url(r'^map\?idType=<placeType>\w+', initmap , name = 'initmap'),
     url(r'^category/$', category , name = 'category'),
     url(r'^category/fun.html$', fun , name = 'fun'),
     url(r'^category/party.html$', party , name = 'party'),
