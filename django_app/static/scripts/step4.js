@@ -5,6 +5,7 @@
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+var wikiRes = " ";
 
 function initAutocomplete() {
 
@@ -31,10 +32,10 @@ function initAutocomplete() {
 
     if (idStr != null) {
         document.getElementById('map').style.visibility = "visible";
-        var idType =idStr[0].substr(7);
+        var idType = idStr[0].substr(7);
         var searchQ = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query="
         var keyQ = "&key=AIzaSyB4d2ew9UfHchhlYl_VBLtGryqgwbD18eA";
-        var fullSearchQ= searchQ.concat(searchQ).concat(keyQ);
+        var fullSearchQ = searchQ.concat(searchQ).concat(keyQ);
     }
 
 
@@ -54,7 +55,7 @@ function initAutocomplete() {
 
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
-        searchBox.addListener('places_changed', function() {
+    searchBox.addListener('places_changed', function() {
         var places = searchBox.getPlaces();
         var resName = places[0].name;
         var apiQ = "https://www.googleapis.com/youtube/v3/search?part=id%2C+snippet&q=";
@@ -68,6 +69,7 @@ function initAutocomplete() {
         var name2 = " ";
         var name3 = " ";
         var xmlHttp = new XMLHttpRequest();
+
         document.getElementById('map').style.visibility = "visible";
         xmlHttp.onreadystatechange = function() {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -76,6 +78,7 @@ function initAutocomplete() {
             document.getElementById('firstVideo').textContent = watchStr + (myResponse.items[0].id.videoId);
             document.getElementById('secondVideo').textContent = watchStr + (myResponse.items[1].id.videoId);
             document.getElementById('thirdVideo').textContent = watchStr + (myResponse.items[2].id.videoId);
+            alert(getInfo('Sydney'));
             name1 = myResponse.items[0].snippet.title;
             name2 = myResponse.items[1].snippet.title;
             name3 = myResponse.items[2].snippet.title;
@@ -103,7 +106,6 @@ function initAutocomplete() {
         xmlHttp.open("GET", resQuery, false);
         // true for asynchronous
         xmlHttp.send(null);
-
         document.getElementById('firstVideo').textContent = name1;
         document.getElementById('secondVideo').textContent = name2;
         document.getElementById('thirdVideo').textContent = name3;
@@ -150,6 +152,7 @@ function initAutocomplete() {
                 bounds.extend(place.geometry.location);
             }
         });
+
         map.fitBounds(bounds);
     });
 }
@@ -225,40 +228,41 @@ function addIntoListFunc(location, map, placeList) {
 }
 
 function createCORSRequest(method, url) {
-  var xhr = new XMLHttpRequest();
-  if ("withCredentials" in xhr) {
-    // XHR for Chrome/Firefox/Opera/Safari.
-    xhr.open(method, url, true);
-  } else if (typeof XDomainRequest != "undefined") {
-    // XDomainRequest for IE.
-    xhr = new XDomainRequest();
-    xhr.open(method, url);
-  } else {
-    // CORS not supported.
-    xhr = null;
-  }
-  return xhr;
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+        // XHR for Chrome/Firefox/Opera/Safari.
+        xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined") {
+        // XDomainRequest for IE.
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+    } else {
+        // CORS not supported.
+        xhr = null;
+    }
+    return xhr;
 }
 
 function getInfo(name) {
-  var url = "https://crossorigin.me/https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=" + encodeURI(name);
+    var url = "https://crossorigin.me/https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=" + encodeURI(name);
 
-  var xhr = createCORSRequest('GET', url);
-  if (!xhr) {
-    alert('CORS not supported');
-    return;
-  }
+    var xhr = createCORSRequest('GET', url);
+    if (!xhr) {
+        alert('CORS not supported');
+        return;
+    }
 
-  xhr.onload = function() {
-    var response = xhr.responseText;
-    var jsonReponse = JSON.parse(response);
-    var text = Object.values(jsonReponse.query.pages)[0].extract;
+    xhr.onload = function() {
+        var response = xhr.responseText;
+        var jsonReponse = JSON.parse(response);
+        var text = Object.values(jsonReponse.query.pages)[0].extract;
+        //alert(text);
+        document.getElementById("wikiPane").innerHTML = text;
+        return text;
+    };
 
-    alert(text);
-  };
-
-  xhr.onerror = function() {
-    alert('Woops, there was an error getting information.');
-  };
-  xhr.send();
+    xhr.onerror = function() {
+        alert('Woops, there was an error getting information.');
+    };
+    xhr.send();
 }

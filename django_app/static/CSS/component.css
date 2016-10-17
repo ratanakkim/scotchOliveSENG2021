@@ -146,11 +146,12 @@
 }
 
 .dr-menu ul {
+	max-height: 30%;
 	padding: 0;
 	margin: 0 3em 0 0;
 	list-style: none;
 	opacity: 0;
-	position: relative;
+	//position: relative;
 	z-index: 0;
 	pointer-events: none;
 	-webkit-transition: opacity 0s linear 205ms;
@@ -159,6 +160,7 @@
 }
 
 .dr-menu.dr-menu-open ul {
+	max-height: 30%;
 	opacity: 1;
 	z-index: 200;
 	pointer-events: auto;
@@ -168,7 +170,11 @@
 }
 
 .dr-menu ul li {
-	display: block;
+	text-overflow: ellipsis;
+	overflow: auto;
+	display: inline-block;
+	max-width: 95%;
+	max-height: 50%;
 	//margin: 0 0 5px 0;
 	margin: 0 0 0px 0;
 	opacity: 0;
@@ -218,6 +224,8 @@
 }
 
 .dr-menu ul li a {
+	overflow:scroll;
+	max-height: 10%
 	display: inline-block;
 	//padding: 0 20px;
 	padding: 0 10px;
@@ -294,5 +302,5 @@
 	content: "\e912";
 }
 .dr-icon-loc:before{
-	content: "\ea0f";
+	content: "\e947";
 }
