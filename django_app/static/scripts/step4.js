@@ -10,6 +10,21 @@ var markers = [];
 var tempID = 0;
 //var positionList = [];
 
+function goToDirections(){
+	var addrArgs = [];
+	for (i=0; i<markers.length; i++){
+		if (markers[i].saved == 1){
+			addrArgs.push(markers[i].position.lat()+","+markers[i].position.lng());
+		}
+	}
+	if (document.location.href.indexOf("?") === -1){
+		document.location.href = document.location.href.substring(0, document.location.href.length-4)+"presets?places="+addrArgs.join("_"); //url with args
+	}
+	else{
+		document.location.href = document.location.href.substring(0, document.location.href.indexOf("?")-4)+"presets?places="+addrArgs.join("_");
+	}
+}
+
 function initAutocomplete() {
 
     infoWindow = new google.maps.InfoWindow();
@@ -49,7 +64,7 @@ function initAutocomplete() {
     map.addListener('bounds_changed', function() {
         searchBox.setBounds(map.getBounds());
     });
-
+	
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
@@ -164,6 +179,13 @@ function initAutocomplete() {
         console.log(markers.length);
         addMarker(event.latLng, map, markers);
     });
+	
+	//we are just implementing the categories to help someone who is very stupid, enter something appropriate into the search box
+	//now going to check if we have an argument in the url
+	if (document.location.href.indexOf("?idType=") != -1){ //have an id argument
+		var argField = document.location.href.substring(document.location.href.indexOf("?idType=")+8, document.location.href.length);
+		window.alert("try entering \"" + argField + "\" into the search box to get your preferred content");
+	}
 }
 
 function showPlayer(index) {
