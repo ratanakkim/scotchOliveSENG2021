@@ -223,3 +223,42 @@ function addIntoListFunc(location, map, placeList) {
     }];
     console.log(marker);
 }
+
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+}
+
+function getInfo(name) {
+  var url = "https://crossorigin.me/https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=" + encodeURI(name);
+
+  var xhr = createCORSRequest('GET', url);
+  if (!xhr) {
+    alert('CORS not supported');
+    return;
+  }
+
+  xhr.onload = function() {
+    var response = xhr.responseText;
+    var jsonReponse = JSON.parse(response);
+    var text = Object.values(jsonReponse.query.pages)[0].extract;
+
+    alert(text);
+  };
+
+  xhr.onerror = function() {
+    alert('Woops, there was an error getting information.');
+  };
+  xhr.send();
+}
