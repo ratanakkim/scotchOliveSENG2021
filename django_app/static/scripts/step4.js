@@ -8,6 +8,7 @@
 var wikiRes = "";
 var markers = [];
 var tempID = 0;
+
 function initAutocomplete() {
 
     infoWindow = new google.maps.InfoWindow();
@@ -30,7 +31,11 @@ function initAutocomplete() {
     var searchBox = new google.maps.places.SearchBox(input);
     var placeList = [];
 
-
+    if (typeof(Storage) !== "undefined") {
+        window.sessionStorage.setItem("markerList", JSON.stringify(markers));
+    } else {
+        alert("No sessionStorage! PANIC!!")
+    }
     if (idStr != null) {
         document.getElementById('map').style.visibility = "visible";
         var idType = idStr[0].substr(7);
@@ -82,7 +87,7 @@ function initAutocomplete() {
                 Allsrc.push(mySrc)
             }
             console.log(Allsrc)
-            //wholeEmbedStr = embedStr + Allsrc[0]
+                //wholeEmbedStr = embedStr + Allsrc[0]
             document.getElementById('playerFrame').src = wholeEmbedStr;
             //document.getElementById('playerFrame').src = wholeEmbedStr;
             document.getElementById('info-box').textContent = wholeEmbedStr;
@@ -137,7 +142,7 @@ function initAutocomplete() {
                 position: place.geometry.location,
                 saved: 0,
                 deleted: 0,
-                number:markers.length,
+                number: markers.length,
 
 
             }));
@@ -173,7 +178,7 @@ function showPlayer(index) {
         //  document.getElementById('playerFrame').src = embedStr + Allsrc[index]
         //  document.getElementById('info-box').textContent = embedStr + Allsrc[index]
         document.getElementById('playerFrame').style.visibility = "hidden"
-        //  document.getElementById('playerFrame').src = embedStr + Allsrc[index]
+            //  document.getElementById('playerFrame').src = embedStr + Allsrc[index]
 
     }
 
@@ -196,16 +201,16 @@ function addMarker(location, map, markers) {
     var marker = new google.maps.Marker({
         position: location,
         map: map,
-        saved :0,
-        deleted:0,
-        number:markers.length,
+        saved: 0,
+        deleted: 0,
+        number: markers.length,
     });
     markers[markers.length] = marker;
     console.log(markers.length);
-    console.log(marker.number+"sup");
+    console.log(marker.number + "sup");
 
     markers.forEach(function(marker) {
-        google.maps.event.addListener(marker, 'click', function () {
+        google.maps.event.addListener(marker, 'click', function() {
             tempID = marker.number;
             console.log(markers.length.toString());
             var save1;
@@ -214,8 +219,7 @@ function addMarker(location, map, markers) {
             var compiled = '<button onclick="savePlace()">Save me to List</button>' +
                 '<button onclick=deletePlace()>Remove the place from list</button>';
 
-            infoWindow.setContent('<p>' + transCoor + '</p>' + compiled
-            );
+            infoWindow.setContent('<p>' + transCoor + '</p>' + compiled);
 
             infoWindow.open(map, marker);
         });
@@ -225,7 +229,7 @@ function addMarker(location, map, markers) {
 
 function savePlace() {
     var temp = 0;
-    while(temp != tempID && temp < 20){
+    while (temp != tempID && temp < 20) {
         temp++;
     }
     if (markers[temp].saved == 1) {
@@ -235,19 +239,19 @@ function savePlace() {
         var x = document.createElement('LI');
         var a = document.createElement('a');
         a.className = "dr-icon1 dr-icon-loc";
-        var textNode = document.createTextNode(markers[temp].number+"\n");
+        var textNode = document.createTextNode(markers[temp].getPosition().toString() + "\n");
         x.appendChild(a);
         x.appendChild(textNode);
         document.getElementById('placeList').appendChild(x);
         console.log(markers[temp].saved + "saved place");
         window.alert("Cheers, u have saved this place to list!");
     }
-    console.log(markers[temp].saved+"iiii");
+    console.log(markers[temp].saved + "iiii");
 }
 
 function deletePlace() {
     var temp = 0;
-    while(temp != tempID && temp < 20 ){
+    while (temp != tempID && temp < 20) {
         temp++;
     }
 
