@@ -59,7 +59,11 @@
     width: 15%;
     float: left;
 }
-
+#routeButton{
+    right: 0%;
+    width: 15%;
+    float: right;
+}
 #placeList {
     //background-color: #ddd;
     left:0%
@@ -88,16 +92,16 @@
 }
 
 #pac-input {
-    //position : fixed;
+    position : center;
     background-color: #fff;
     font-family: Roboto;
     font-size: 15px;
     font-weight: 300;
-    //left: 50%;
+    left: 50%;
     //transform: translate(-50%, 00%);
     //padding: 0 11px 0 13px;
     text-overflow: ellipsis;
-    width: 100%;
+    width: 70%;
     //z-index:0;
 }
 
