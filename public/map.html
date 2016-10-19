@@ -38,8 +38,9 @@
         <!--<div id="info-box">?</div> -->
         <iframe id="playerFrame" src="https://www.youtube.com/embed/obgckExzwLc" frameborder="0" allowfullscreen></iframe>
 		
-		<a onclick="goToDirections();" class="button">Give me directions</a>
-		<a href="../category" class="button">Suggest something to me</a>
+		<input onclick="goToDirections();" id ="routebutton"class ="rightbutton" type = "button" value="Give me direction">
+		
+        <button onclick="window.location.href='../category'">Suggest something to me</button>
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4d2ew9UfHchhlYl_VBLtGryqgwbD18eA&libraries=places&callback=initAutocomplete" async defer></script>
         {% load static %}
