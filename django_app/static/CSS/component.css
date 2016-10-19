@@ -19,6 +19,15 @@
 	font-style: normal;
 }
 
+.rightbutton{
+	right:0%;
+	top:33%;
+	position: absolute;
+    width: 15%;
+    font-size: 150%
+    //height: 50%;
+}
+
 .infobutton{
 	left:0%;
 	top:35%;
@@ -48,7 +57,7 @@
 	font-size: 1.3em;
 	line-height: 2.5;
 	font-weight: 400;
-	color: #fff;
+	color: black;
 	padding-top: 2em;
 }
 
@@ -84,7 +93,7 @@
 	transition: all 0.2s ease;
 }
 .dr-menu.dr-menu-open > div .dr-icon {
-	color: #60a773;
+	color: red;
 	left: 100%;
 	//-webkit-transform: translateX(-100%);
 	-moz-transform: translateX(-100%);
@@ -92,7 +101,7 @@
 	//transform: translateX(-100%);
 }
 .dr-menu.dr-menu-open > div .dr-icon1 {
-	color: #60a773;
+	color: red;
 	left: 100%;
 	//-webkit-transform: translateX(-100%);
 	-moz-transform: translateX(-100%);
@@ -129,7 +138,7 @@
 	padding-left: 3em;
 	position: relative;
 	display: block;
-	color: #60a773;
+	color: blue;
 	font-size: 0.9em;
 	font-weight: 700;
 	letter-spacing: 1px;
