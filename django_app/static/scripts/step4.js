@@ -64,7 +64,7 @@ function initAutocomplete() {
     map.addListener('bounds_changed', function() {
         searchBox.setBounds(map.getBounds());
     });
-	
+
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
@@ -179,7 +179,7 @@ function initAutocomplete() {
         console.log(markers.length);
         addMarker(event.latLng, map, markers);
     });
-	
+
 	//we are just implementing the categories to help someone who is very stupid, enter something appropriate into the search box
 	//now going to check if we have an argument in the url
 	if (document.location.href.indexOf("?idType=") != -1){ //have an id argument
@@ -189,7 +189,7 @@ function initAutocomplete() {
 }
 
 function showPlayer(index) {
-    alert(wikiRes);
+    
     document.getElementById("wikiPane").innerHTML = wikiRes;
     embedStr = "https://www.youtube.com/embed/"
     if (document.getElementById('playerFrame').style.visibility == "hidden") {

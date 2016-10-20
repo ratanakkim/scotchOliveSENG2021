@@ -18,7 +18,15 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
+#dirBut{
+	margin:0 3em 1em 2em;
+}
+#sugBut{
+	margin:0 3em 1em 2em;
+}
+#videoList{
+	margin: 2.5em 0 0 0;
+}
 .rightbutton{
 	right:0%;
 	top:33%;
@@ -57,7 +65,7 @@
 .dr-menu {
 	float:left;//added
 	//width: 100%;
-	width: 15%;
+	width: 14%;
 	height: 30%;//added
 	max-height: 30%;
 	max-width: 400px;

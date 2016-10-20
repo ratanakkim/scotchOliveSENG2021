@@ -16,7 +16,7 @@
         <input id="pac-input" class="controls" type="text" placeholder="Search Box">
         <!--<input class="infobutton" id="wikiButton" type="button" name="info" value="Information" onclick="getInfo('Sydney')" >-->
         <div  id= "wikiPane" class="infoPanel">???</div>
-        <nav class="dr-menu">
+        <nav class="dr-menu" id="videoList">
             <div class="dr-trigger"><span class="dr-icon dr-icon-menu"></span><a class="dr-label">video</a></div>
             <ul  id="myList" class="listClass">
                 <li><a class="dr-icon1 dr-icon-play" href="javascript:void(0)" id="firstVideo" onclick="showPlayer(0)"></a></li>
@@ -38,11 +38,8 @@
         <div id="info-box"></div>
         <!--<div id="info-box">?</div> -->
         <iframe id="playerFrame" src="https://www.youtube.com/embed/obgckExzwLc" frameborder="0" allowfullscreen></iframe>
-
-		<input onclick="goToDirections();" id ="routebutton"class ="btn btn-success" type = "button" value="Give me direction">
-
-        <button onclick="window.location.href='../category'"  class="btn btn-success">Suggest something to me</button>
-
+		<input id="dirBut"onclick="goToDirections();" id ="routebutton"class ="btn btn-success" type = "button" value="Give me direction">
+        <button id="sugBut"onclick="window.location.href='../category'"  class="btn btn-success">Suggest something to me</button>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4d2ew9UfHchhlYl_VBLtGryqgwbD18eA&libraries=places&callback=initAutocomplete" async defer></script>
         {% load static %}
         <script type="text/javascript" src="{% static "scripts/step4.js" %}"></script>
