@@ -78,11 +78,12 @@
 }
 .centTxt {
 			position: absolute;
-			top:25%;
-			left:25%;
+			top:50%;
+			left:50%;
             text-align: center;
             display: table-cell;
             vertical-align: middle;
+			transform: translate(-50%, -50%);
 			color:  #fff;
         }
 .dr-menu > div .dr-icon {
