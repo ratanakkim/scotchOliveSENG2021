@@ -77,7 +77,27 @@
 	color:  #fff;
 	padding-top: 2em;
 }
-
+.dr-menu .tooltiptext {
+	top:2.5%;
+	height: 5%;
+	font-size: .75em;
+	line-height: 75%;
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+	vertical-align:middle;
+    text-align: center;
+    //border-radius: 6px;
+    //padding: 5px 0;
+    opacity: 0.5;
+    /* Position the tooltip */
+    position:absolute;;
+    z-index: 1;
+}
+.dr-menu:hover .tooltiptext {
+    visibility: visible;
+}
 .dr-menu > div  {
 	cursor: pointer;
 	position: absolute;
