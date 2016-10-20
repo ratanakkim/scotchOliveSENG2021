@@ -22,8 +22,10 @@ from django_app.views import party
 from django_app.views import foodAndDrinks
 from django_app.views import directions
 from django_app.views import directPres
+from django_app.views import home
 urlpatterns = [
-    url(r'^$', index, name = 'index'),
+    url(r'^$', home , name = 'home'),
+    url(r'^home/$', home , name = 'home'),
     url(r'^map/$', initmap , name = 'initmap'),
     url(r'^map\?idType=<placeType>\w+', initmap , name = 'initmap'),
     url(r'^category/$', category , name = 'category'),

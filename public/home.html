@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Places Searchbox</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static "CSS/stylev2.css" %}"/>
+        <link rel="stylesheet"  href="{% static "css/default.css" %}"/>
+		<link rel="stylesheet" href="{% static "css/component.css" %}"/>
+		<script  src="{% static "scripts/modernizr.custom.js" %}"></script>
+    </head>
+    <body>
+        <div id= "explainTxt" class="centTxt">
+            <center>This app will allows you to search for interesting places and view videos related to them.</center>
+            <center>The app is also capable of helping plot routes with waypoints.</center>
+            <center>Let's begin by. Click the button to be taken to the app page and search with the bar.</center>
+            <button onclick="window.location.href='../map'" type="button" class="btn btn-success">Show me the fun stuff</button>
+        </div>
+
+        <script type="text/javascript" src="{% static "scripts/step4.js" %}"></script>
+        <script type="text/javascript" src="{% static "scripts/ytmenu.js" %}"></script>
+    </body>
+</html>

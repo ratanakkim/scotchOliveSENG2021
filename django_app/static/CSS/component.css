@@ -27,6 +27,15 @@
     font-size: 150%
     //height: 50%;
 }
+.rightbutton2{
+	right:0%;
+	top:37%;
+	position: absolute;
+    width: 15%;
+	height: auto;
+    font-size: 150%
+    //height: 50%;
+}
 
 .infobutton{
 	left:0%;
@@ -57,7 +66,7 @@
 	font-size: 1.3em;
 	line-height: 2.5;
 	font-weight: 400;
-	color: black;
+	color:  #fff;
 	padding-top: 2em;
 }
 
@@ -67,7 +76,15 @@
 	width: 100%;
 	z-index: 100;
 }
-
+.centTxt {
+			position: absolute;
+			top:25%;
+			left:25%;
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+			color:  #fff;
+        }
 .dr-menu > div .dr-icon {
 	top: 0;
 	float:left;
@@ -93,7 +110,7 @@
 	transition: all 0.2s ease;
 }
 .dr-menu.dr-menu-open > div .dr-icon {
-	color: red;
+	color: orange;
 	left: 100%;
 	//-webkit-transform: translateX(-100%);
 	-moz-transform: translateX(-100%);
@@ -138,7 +155,7 @@
 	padding-left: 3em;
 	position: relative;
 	display: block;
-	color: blue;
+	color: #fff;
 	font-size: 0.9em;
 	font-weight: 700;
 	letter-spacing: 1px;
@@ -240,7 +257,7 @@
 	display: inline-block;
 	//padding: 0 20px;
 	padding: 0 10px;
-	//color: #fff;
+	color: #fff;
 }
 
 .dr-menu ul li a:hover {

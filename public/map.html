@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <title>Places Searchbox</title>
         {% load static %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static "CSS/stylev2.css" %}"/>
         <link rel="stylesheet"  href="{% static "css/default.css" %}"/>
 		<link rel="stylesheet" href="{% static "css/component.css" %}"/>
@@ -37,10 +38,10 @@
         <div id="info-box"></div>
         <!--<div id="info-box">?</div> -->
         <iframe id="playerFrame" src="https://www.youtube.com/embed/obgckExzwLc" frameborder="0" allowfullscreen></iframe>
-		
-		<input onclick="goToDirections();" id ="routebutton"class ="rightbutton" type = "button" value="Give me direction">
-		
-        <button onclick="window.location.href='../category'">Suggest something to me</button>
+
+		<input onclick="goToDirections();" id ="routebutton"class ="btn btn-success" type = "button" value="Give me direction">
+
+        <button onclick="window.location.href='../category'"  class="btn btn-success">Suggest something to me</button>
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4d2ew9UfHchhlYl_VBLtGryqgwbD18eA&libraries=places&callback=initAutocomplete" async defer></script>
         {% load static %}

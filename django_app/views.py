@@ -16,3 +16,5 @@ def directions(request):
     return render(request, "directions.html", {})
 def directPres(request):
     return render(request, "directionsPreset.html", {})
+def home(request):
+    return render(request, "home.html", {})
