@@ -11,7 +11,7 @@ def fun(request):
 def party(request):
     return render(request, "party.html", {})
 def foodAndDrinks(request):
-    return render(request, "party.html", {})
+    return render(request, "foodAndDrinks.html", {})
 def directions(request):
     return render(request, "directions.html", {})
 def directPres(request):
