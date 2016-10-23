@@ -1,0 +1,8 @@
+https://developers.google.com/maps/documentation/javascript/examples/directions-waypoints - used parts of this for directions feature
+https://developers.google.com/maps/documentation/javascript/geolocation - used parts of this for directions feature to determine location
+http://www.prepbootstrap.com/bootstrap-template/responsive-image-tiles - used parts of this to help in the categories feature
+https://developers.google.com/maps/documentation/javascript/examples/directions-simple - for helping in directions feature
+https://developers.google.com/web/fundamentals/native-hardware/user-location/ - getting user location
+
+Pre-existing CSS:
+http://tympanus.net/codrops/2013/04/25/simple-youtube-menu-effect/
